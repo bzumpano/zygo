@@ -1,7 +1,7 @@
 - if books.blank?
 
   .text-muted.text-center
-    = t('messages.filters.no_results_found')
+    = t('messages.no_results_found')
 
 - else
 
@@ -20,4 +20,4 @@
 
               .col-12.col-lg-6.text-lg-right
                 = link_to t('.commands.edit'), edit_platform_book_path(book), class: 'btn btn-sm btn-link text-primary'
-                = link_to t('.commands.destroy'), platform_book_path(book), method: :delete, data: { confirm: t('.commands.remove_confirm') }, class: 'btn btn-sm btn-link text-danger'
+                = link_to t('.commands.destroy'), platform_book_path(book), method: :delete, data: { confirm: t('commands.remove_confirm') }, class: 'btn btn-sm btn-link text-danger'

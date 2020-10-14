@@ -25,5 +25,12 @@ module Zygo
       g.assets = false
       g.helper = false
     end
+
+    config.encoding = 'utf-8'
+
+    # Carrega os locales separados em vários arquivos
+    config.i18n.load_path += Dir[
+      Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s
+    ]
   end
 end

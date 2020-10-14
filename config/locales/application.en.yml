@@ -1,0 +1,5 @@
+en:
+  application:
+    navbar:
+      hello: 'Hello, %{user}'
+      logout: Logout

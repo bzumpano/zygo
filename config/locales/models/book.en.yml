@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    attributes:
+      book:
+        title: Title
+        description: Description
+        image: Image
+        author: Author
+
+    errors:
+      models:
+        book:
+          attributes:
