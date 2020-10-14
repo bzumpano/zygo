@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Platform::BooksController, type: :controller do
+  let(:user) { create(:user) }
+
+  before { sign_in(user) }
+
   describe 'GET #index' do
     before { get(:index) }
 
@@ -236,20 +240,6 @@ RSpec.describe Platform::BooksController, type: :controller do
         before { delete(:destroy, params: { id: book }) }
 
         it { expect(controller).to set_flash.to(expected_flash) }
-      end
-    end
-  end
-
-  describe 'GET #show' do
-    let(:book) { create(:book) }
-
-    before { get(:show, params: { id: book }) }
-
-    describe 'helper methods' do
-      let(:view_context) { controller.view_context }
-
-      context 'book' do
-        it { expect(view_context.book).to eq(book) }
       end
     end
   end
