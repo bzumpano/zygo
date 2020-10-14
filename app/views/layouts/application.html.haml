@@ -9,6 +9,8 @@
 
     = yield(:stylesheet)
   %body
+    = render 'application/navbar'
+
     .container-lg
       - if notice.present?
         .alert.alert-dismissible.fade.show.alert-success{ role: :alert }
