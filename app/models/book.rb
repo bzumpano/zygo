@@ -1,4 +1,5 @@
 class Book < ApplicationRecord
+  include Book::Search
 
   #  Validations
 
