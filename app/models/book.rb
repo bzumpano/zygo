@@ -1,6 +1,8 @@
 class Book < ApplicationRecord
   include Book::Search
 
+  acts_as_favoritable
+
   #  Validations
 
   validates :title,

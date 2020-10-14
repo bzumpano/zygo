@@ -32,6 +32,7 @@ gem 'simple_form'
 gem "haml-rails", "~> 2.0"
 gem 'devise'
 gem 'devise-bootstrapped', github: 'king601/devise-bootstrapped', branch: 'bootstrap4'
+gem 'acts_as_favoritor'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
