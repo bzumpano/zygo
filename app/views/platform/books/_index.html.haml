@@ -1,0 +1,23 @@
+- if books.blank?
+
+  .text-muted.text-center
+    = t('messages.filters.no_results_found')
+
+- else
+
+  .row.row-cols-md-1.row-cols-lg-2.row-cols-xl-3
+    - books.each do |book|
+      .col.d-flex.mb-4
+        .card.flex-fill
+          = image_tag(book.image, class: 'card-img-top') if book.image =~ URI::regexp
+          .card-body
+            %h5.card-title= highlight(book.title, params[:search])
+            %p.card-text= highlight(book.description, params[:search])
+          .card-footer
+            .row
+              .col-12.col-lg-6
+                %small.text-muted= highlight(book.author, params[:search])
+
+              .col-12.col-lg-6.text-lg-right
+                = link_to t('.commands.edit'), edit_platform_book_path(book), class: 'btn btn-sm btn-link text-primary'
+                = link_to t('.commands.destroy'), platform_book_path(book), method: :delete, data: { confirm: t('.commands.remove_confirm') }, class: 'btn btn-sm btn-link text-danger'

@@ -1,0 +1,10 @@
+.row.justify-content-center
+  .col-12.col-lg-9
+
+    .card
+      .card-header
+        %h2.h4.card-title.mb-0= t('.title')
+
+      .card-body
+        .card-text
+          = render 'form', book: book

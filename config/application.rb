@@ -18,6 +18,12 @@ module Zygo
 
     config.generators do |g|
       g.test_framework :rspec
+      g.template_engine :haml
+      g.view_specs false
+      g.controller_specs true
+
+      g.assets = false
+      g.helper = false
     end
   end
 end
