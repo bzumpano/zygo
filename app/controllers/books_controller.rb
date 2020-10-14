@@ -1,4 +1,4 @@
-class Platform::BooksController < ApplicationController
+class BooksController < ApplicationController
 
   PERMITTED_PARAMS = %i[
     title
@@ -28,7 +28,7 @@ class Platform::BooksController < ApplicationController
   def create
     if book.save
       flash[:notice] = t('.done')
-      redirect_to platform_books_path
+      redirect_to books_path
     else
       flash.now[:alert] = t('.error')
       render :new
@@ -43,7 +43,7 @@ class Platform::BooksController < ApplicationController
 
     if book.save
       flash[:notice] = t('.done')
-      redirect_to platform_books_path
+      redirect_to books_path
     else
       flash.now[:alert] = t('.error')
       render :edit
@@ -53,10 +53,10 @@ class Platform::BooksController < ApplicationController
   def destroy
     if book.destroy
       flash[:notice] = t('.done')
-      redirect_to platform_books_path
+      redirect_to books_path
     else
       flash[:notice] = t('.error')
-      redirect_to platform_books_path
+      redirect_to books_path
     end
   end
 

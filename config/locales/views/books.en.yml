@@ -1,0 +1,41 @@
+en:
+  books:
+    index:
+      title: Books
+      commands:
+        new: New book
+        edit: Edit
+        destroy: Delete
+        search: Search
+      filters:
+        order: Sort
+      search:
+        placeholder: Search by title, description or author
+
+    new:
+      title: New book
+
+    form:
+      commands:
+        save: Save
+        cancel: Cancel
+
+    create:
+      done: Book created with success
+      error: Error creating book
+
+
+    edit:
+      title: Edit book
+
+    update:
+      done: Book updated with success
+      error: Error updating book
+
+    destroy:
+      done: Book deleted with success
+      error: Error deleting book
+
+    show:
+      commands:
+        back: Back

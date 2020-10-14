@@ -1,4 +1,4 @@
-= simple_form_for [:platform, book] do |f|
+= simple_form_for book do |f|
   .row
     .col-12
       = f.input :title
@@ -17,6 +17,6 @@
 
   .row.mt-3
     .col-12.col-lg-6
-      = link_to t('.commands.cancel'), platform_books_path, class: 'btn btn-warning float-left'
+      = link_to t('.commands.cancel'), books_path, class: 'btn btn-warning float-left'
     .col-12.col-lg-6
       = f.submit t('.commands.save'), class: 'btn btn-primary float-right'

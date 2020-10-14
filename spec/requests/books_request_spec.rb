@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Platform::Books", type: :request do
+RSpec.describe "Books", type: :request do
   let(:user) { create(:user) }
 
   describe "GET /index" do
     describe 'unauthorized' do
-      before { get platform_books_path }
+      before { get books_path }
 
       it { is_expected.to redirect_to(new_user_session_path) }
     end
@@ -14,7 +14,7 @@ RSpec.describe "Platform::Books", type: :request do
       before { sign_in(user) }
 
       it 'returns http :success' do
-        get platform_books_path
+        get books_path
         expect(response).to have_http_status(:success)
       end
     end
@@ -22,7 +22,7 @@ RSpec.describe "Platform::Books", type: :request do
 
   describe "GET /new" do
     describe 'unauthorized' do
-      before { get new_platform_book_path }
+      before { get new_book_path }
 
       it { is_expected.to redirect_to(new_user_session_path) }
     end
@@ -31,7 +31,7 @@ RSpec.describe "Platform::Books", type: :request do
       before { sign_in(user) }
 
       it 'returns http :success' do
-        get new_platform_book_path
+        get new_book_path
         expect(response).to have_http_status(:success)
       end
     end
@@ -43,7 +43,7 @@ RSpec.describe "Platform::Books", type: :request do
     end
 
     describe 'unauthorized' do
-      before { post(platform_books_path, params: valid_params) }
+      before { post(books_path, params: valid_params) }
 
       it { is_expected.to redirect_to(new_user_session_path) }
     end
@@ -53,14 +53,14 @@ RSpec.describe "Platform::Books", type: :request do
 
       context 'valid' do
         context 'redirects to index' do
-          before { post(platform_books_path, params: valid_params) }
+          before { post(books_path, params: valid_params) }
 
-          it { expect(response).to redirect_to(platform_books_path) }
+          it { expect(response).to redirect_to(books_path) }
         end
 
         it 'create book' do
           expect do
-            post(platform_books_path, params: valid_params)
+            post(books_path, params: valid_params)
           end.to change(Book, :count).by(1)
         end
       end
@@ -71,14 +71,14 @@ RSpec.describe "Platform::Books", type: :request do
         end
 
         context 'returns http :success' do
-          before { post(platform_books_path, params: invalid_params) }
+          before { post(books_path, params: invalid_params) }
 
           it { expect(response).to have_http_status(:success) }
         end
 
         it 'not create book' do
           expect do
-            post(platform_books_path, params: invalid_params)
+            post(books_path, params: invalid_params)
           end.to change(Book, :count).by(0)
         end
       end
@@ -89,7 +89,7 @@ RSpec.describe "Platform::Books", type: :request do
     let(:book) { create(:book) }
 
     describe 'unauthorized' do
-      before { get(edit_platform_book_path(book)) }
+      before { get(edit_book_path(book)) }
 
       it { is_expected.to redirect_to(new_user_session_path) }
     end
@@ -98,7 +98,7 @@ RSpec.describe "Platform::Books", type: :request do
       before { sign_in(user) }
 
       it 'returns http :success' do
-        get(edit_platform_book_path(book))
+        get(edit_book_path(book))
         expect(response).to have_http_status(:success)
       end
     end
@@ -113,7 +113,7 @@ RSpec.describe "Platform::Books", type: :request do
     end
 
     describe 'unauthorized' do
-      before { patch(platform_book_path(book), params: valid_params) }
+      before { patch(book_path(book), params: valid_params) }
 
       it { is_expected.to redirect_to(new_user_session_path) }
     end
@@ -122,10 +122,10 @@ RSpec.describe "Platform::Books", type: :request do
       before { sign_in(user) }
 
       context 'valid' do
-        before { patch(platform_book_path(book), params: valid_params) }
+        before { patch(book_path(book), params: valid_params) }
 
         context 'redirects to index' do
-          it { expect(response).to redirect_to(platform_books_path) }
+          it { expect(response).to redirect_to(books_path) }
         end
 
         it 'update book' do
@@ -138,7 +138,7 @@ RSpec.describe "Platform::Books", type: :request do
           { book: attributes_for(:book, title: nil) }
         end
 
-        before { patch(platform_book_path(book), params: invalid_params) }
+        before { patch(book_path(book), params: invalid_params) }
 
         context 'returns http :success' do
           it { expect(response).to have_http_status(:success) }
@@ -155,7 +155,7 @@ RSpec.describe "Platform::Books", type: :request do
     let(:book) { create(:book) }
 
     describe 'unauthorized' do
-      before { delete(platform_book_path(book)) }
+      before { delete(book_path(book)) }
 
       it { is_expected.to redirect_to(new_user_session_path) }
     end
@@ -165,15 +165,15 @@ RSpec.describe "Platform::Books", type: :request do
 
       context 'valid' do
         context 'redirects to index' do
-          before { delete(platform_book_path(book)) }
-          it { expect(response).to redirect_to(platform_books_path) }
+          before { delete(book_path(book)) }
+          it { expect(response).to redirect_to(books_path) }
         end
 
         it 'remove book' do
           book
 
           expect do
-            delete(platform_book_path(book))
+            delete(book_path(book))
           end.to change(Book, :count).by(-1)
         end
       end
@@ -184,13 +184,13 @@ RSpec.describe "Platform::Books", type: :request do
         end
 
         context 'redirects to index' do
-          before { delete(platform_book_path(book)) }
-          it { expect(response).to redirect_to(platform_books_path) }
+          before { delete(book_path(book)) }
+          it { expect(response).to redirect_to(books_path) }
         end
 
         it 'not destroy book' do
           expect do
-            delete(platform_book_path(book))
+            delete(book_path(book))
           end.to change(Book, :count).by(0)
         end
       end

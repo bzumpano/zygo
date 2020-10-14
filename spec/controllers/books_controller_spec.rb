@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Platform::BooksController, type: :controller do
+RSpec.describe BooksController, type: :controller do
   let(:user) { create(:user) }
 
   before { sign_in(user) }
@@ -67,11 +67,11 @@ RSpec.describe Platform::BooksController, type: :controller do
       end
 
       context 'redirect to index' do
-        let(:expected_flash) { I18n.t('platform.books.create.done') }
+        let(:expected_flash) { I18n.t('books.create.done') }
 
         before { post(:create, params: valid_params) }
 
-        it { expect(response).to redirect_to(platform_books_path) }
+        it { expect(response).to redirect_to(books_path) }
         it { expect(controller).to set_flash.to(expected_flash) }
       end
     end
@@ -86,7 +86,7 @@ RSpec.describe Platform::BooksController, type: :controller do
       end
 
       context 'render new with errors' do
-        let(:expected_flash) { I18n.t('platform.books.create.error') }
+        let(:expected_flash) { I18n.t('books.create.error') }
 
         before { post(:create, params: valid_params) }
 
@@ -152,11 +152,11 @@ RSpec.describe Platform::BooksController, type: :controller do
       end
 
       context 'redirect to index' do
-        let(:expected_flash) { I18n.t('platform.books.update.done') }
+        let(:expected_flash) { I18n.t('books.update.done') }
 
         before { patch(:update, params: valid_params) }
 
-        it { expect(response).to redirect_to(platform_books_path) }
+        it { expect(response).to redirect_to(books_path) }
         it { expect(controller).to set_flash.to(expected_flash) }
       end
     end
@@ -171,7 +171,7 @@ RSpec.describe Platform::BooksController, type: :controller do
         before { patch(:update, params: valid_params) }
 
         it { expect(book.reload.title).not_to eq(new_title) }
-        it { expect(controller).to set_flash.now.to(I18n.t("platform.books.update.error")) }
+        it { expect(controller).to set_flash.now.to(I18n.t("books.update.error")) }
       end
     end
   end
@@ -196,18 +196,18 @@ RSpec.describe Platform::BooksController, type: :controller do
         expect do
           delete(:destroy, params: { id: book })
 
-          expect(response).to redirect_to(platform_books_path)
+          expect(response).to redirect_to(books_path)
         end.to change(Book, :count).by(-1)
       end
 
       context 'redirect to index' do
         before { delete(:destroy, params: { id: book }) }
 
-        it { expect(response).to redirect_to(platform_books_path) }
+        it { expect(response).to redirect_to(books_path) }
       end
 
       context 'set flash' do
-        let(:expected_flash) { I18n.t('platform.books.destroy.done') }
+        let(:expected_flash) { I18n.t('books.destroy.done') }
 
         before { delete(:destroy, params: { id: book }) }
 
@@ -224,18 +224,18 @@ RSpec.describe Platform::BooksController, type: :controller do
         expect do
           delete(:destroy, params: { id: book })
 
-          expect(response).to redirect_to(platform_books_path)
+          expect(response).to redirect_to(books_path)
         end.to change(Book, :count).by(0)
       end
 
       context 'redirect to index' do
         before { delete(:destroy, params: { id: book }) }
 
-        it { expect(response).to redirect_to(platform_books_path) }
+        it { expect(response).to redirect_to(books_path) }
       end
 
       context 'set flash' do
-        let(:expected_flash) { I18n.t('platform.books.destroy.error') }
+        let(:expected_flash) { I18n.t('books.destroy.error') }
 
         before { delete(:destroy, params: { id: book }) }
 

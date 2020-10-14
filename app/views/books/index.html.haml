@@ -6,7 +6,7 @@
   .card-body{ data: { behavior: 'remote-content' } }
     .card-text
       .remote-content{ data: { remote_content: :filters } }
-        = form_for platform_books_path, method: :get, remote: true do |f|
+        = form_for books_path, method: :get, remote: true do |f|
           .row
             .col-12.col-sm-6
               = text_field_tag(:search, params[:search], class: 'form-control w-100 mb-3', 'data-filter-bar-ignore-submit-on-enter': 'true', placeholder: t('.search.placeholder'))
@@ -15,7 +15,7 @@
               = f.submit t('.commands.search'), class: 'btn btn-primary btn-block'
             .col-12.col-sm-3
               .mt-2.mt-sm-0
-                = link_to t('.commands.new'), new_platform_book_path, class: 'btn btn-success btn-block'
+                = link_to t('.commands.new'), new_book_path, class: 'btn btn-success btn-block'
 
 
           .row.mt-2
