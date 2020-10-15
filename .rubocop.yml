@@ -10,6 +10,7 @@ AllCops:
     - 'bin/**/*'
     - 'spec/fixtures/**/*'
     - 'tmp/**/*'
+    - 'node_modules/**/*'
   TargetRubyVersion: 2.7.1
 
 Metrics/LineLength:
@@ -23,6 +24,9 @@ Metrics/BlockLength:
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - spec/**/*
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
 
 Style/Documentation:
   Enabled: false

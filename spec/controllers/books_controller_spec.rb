@@ -27,7 +27,7 @@ RSpec.describe BooksController, type: :controller do
     describe 'helper methods' do
       let(:view_context) { controller.view_context }
 
-      context 'book' do
+      describe 'book' do
         it { expect(view_context.book).to be_new_record }
       end
     end
@@ -52,7 +52,7 @@ RSpec.describe BooksController, type: :controller do
 
       before { post(:create, params: valid_params) }
 
-      context 'book' do
+      describe 'book' do
         it { expect(view_context.book).to be_persisted }
       end
     end
@@ -105,7 +105,7 @@ RSpec.describe BooksController, type: :controller do
     describe 'helper methods' do
       let(:view_context) { controller.view_context }
 
-      context 'book' do
+      describe 'book' do
         it { expect(view_context.book).to eq(book) }
       end
     end
@@ -137,7 +137,7 @@ RSpec.describe BooksController, type: :controller do
 
       before { patch(:update, params: valid_params) }
 
-      context 'book' do
+      describe 'book' do
         it { expect(view_context.book).to eq(book) }
       end
     end
@@ -186,7 +186,7 @@ RSpec.describe BooksController, type: :controller do
 
       before { delete(:destroy, params: { id: book }) }
 
-      context 'book' do
+      describe 'book' do
         it { expect(view_context.book).to eq(book) }
       end
     end
