@@ -4,8 +4,6 @@ en:
       title: Books
       commands:
         new: New book
-        edit: Edit
-        destroy: Delete
         search: Search
       filters:
         order: Sort

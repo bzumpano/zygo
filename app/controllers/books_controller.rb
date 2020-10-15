@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  include CableReady::Broadcaster
 
   PERMITTED_PARAMS = %i[
     title
@@ -6,6 +7,16 @@ class BooksController < ApplicationController
     image
     author
   ]
+
+  # callbacks
+
+  after_action only: [:favorite, :unfavorite] do
+    cable_ready["books"].morph(
+      selector: "#" + ActionView::RecordIdentifier.dom_id(book),
+      html: ApplicationController.render(partial: 'books/book', locals: { current_user: current_user, book: book })
+    )
+    cable_ready.broadcast
+  end
 
   # helper methods
 
@@ -64,6 +75,14 @@ class BooksController < ApplicationController
     book
   end
 
+  def favorite
+    current_user.favorite(book)
+  end
+
+  def unfavorite
+    current_user.unfavorite(book)
+  end
+
   private
 
   def books
@@ -87,7 +106,7 @@ class BooksController < ApplicationController
   end
 
   def find_action?
-    %w[edit update destroy show].include?(action_name)
+    %w[edit update destroy show favorite unfavorite].include?(action_name)
   end
 
   def param_order

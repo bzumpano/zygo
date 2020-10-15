@@ -15,9 +15,11 @@ $(function() {
         _form.find('input[type="submit"]').click();
       });
 
-      _container.on('ajax:success', function(aEventT) {
-        const [_data, _status, xhr] = event.detail;
-        _domResultsContainer.html(xhr.responseText);
+      _domFiltersContainer.on('ajax:success', function(aEvent) {
+        const [data, status, xhr] = aEvent.detail;
+        if (data) {
+          _domResultsContainer.html(xhr.responseText);
+        }
 
         _domFiltersContainer.find('input[type=submit]:disabled').prop('disabled', false);
       });

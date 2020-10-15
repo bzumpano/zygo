@@ -196,4 +196,56 @@ RSpec.describe "Books", type: :request do
       end
     end
   end
+
+  describe 'PATCH #favorite' do
+    let(:book) { create(:book) }
+
+    describe 'unauthorized' do
+      before { patch(favorite_book_path(book)) }
+
+      it { is_expected.to redirect_to(new_user_session_path) }
+    end
+
+    describe 'authorized' do
+      before { sign_in(user) }
+
+      context 'valid' do
+        before { patch(favorite_book_path(book)) }
+
+        context 'returns http :success' do
+          it { expect(response).to have_http_status(:success) }
+        end
+
+        context 'favorite book for user' do
+          it { expect(user.favorited?(book)).to eq(true) }
+        end
+      end
+    end
+  end
+
+  describe 'PATCH #unfavorite' do
+    let(:book) { create(:book) }
+
+    describe 'unauthorized' do
+      before { patch(unfavorite_book_path(book)) }
+
+      it { is_expected.to redirect_to(new_user_session_path) }
+    end
+
+    describe 'authorized' do
+      before { sign_in(user) }
+
+      context 'valid' do
+        before { patch(unfavorite_book_path(book)) }
+
+        context 'returns http :success' do
+          it { expect(response).to have_http_status(:success) }
+        end
+
+        context 'unfavorite book for user' do
+          it { expect(user.favorited?(book)).to eq(false) }
+        end
+      end
+    end
+  end
 end

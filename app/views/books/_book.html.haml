@@ -1,0 +1,20 @@
+.col.d-flex.mb-4{ id: dom_id(book) }
+  .card.flex-fill
+    = image_tag(book.image, class: 'card-img-top') if book.image =~ URI::regexp
+
+    - if current_user.favorited?(book)
+      = link_to fa_icon("star 2x"), unfavorite_book_path(book), class: 'btn btn-link btn-favorite', method: :patch, remote: true
+    - else
+      = link_to fa_icon("star-o 2x"), favorite_book_path(book), class: 'btn btn-link btn-favorite', method: :patch, remote: true
+
+    .card-body
+      %h5.card-title= highlight(book.title, params[:search])
+      %p.card-text= highlight(book.description, params[:search])
+    .card-footer
+      .row
+        .col-12.col-lg-6
+          %small.text-muted= highlight(book.author, params[:search])
+
+        .col-12.col-lg-6.text-lg-right
+          = link_to t('commands.edit'), edit_book_path(book), class: 'btn btn-sm btn-link text-primary'
+          = link_to t('commands.destroy'), book_path(book), method: :delete, data: { confirm: t('commands.remove_confirm') }, class: 'btn btn-sm btn-link text-danger'
