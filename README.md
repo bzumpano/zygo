@@ -22,7 +22,7 @@ bundle exec rake db:create
 bundle exec rake db:setup
 ```
 
-##### 4. Inicie o servidor
+### 3. Inicie o servidor
 
 ```ruby
 bundle exec rails s
