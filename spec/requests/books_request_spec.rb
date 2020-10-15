@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Books", type: :request do
+RSpec.describe 'Books', type: :request do
   let(:user) { create(:user) }
 
-  describe "GET /index" do
+  describe 'GET /index' do
     describe 'unauthorized' do
       before { get books_path }
 
@@ -20,7 +22,7 @@ RSpec.describe "Books", type: :request do
     end
   end
 
-  describe "GET /new" do
+  describe 'GET /new' do
     describe 'unauthorized' do
       before { get new_book_path }
 
@@ -85,7 +87,7 @@ RSpec.describe "Books", type: :request do
     end
   end
 
-  describe "GET /edit" do
+  describe 'GET /edit' do
     let(:book) { create(:book) }
 
     describe 'unauthorized' do
@@ -166,6 +168,7 @@ RSpec.describe "Books", type: :request do
       context 'valid' do
         context 'redirects to index' do
           before { delete(book_path(book)) }
+
           it { expect(response).to redirect_to(books_path) }
         end
 
@@ -185,6 +188,7 @@ RSpec.describe "Books", type: :request do
 
         context 'redirects to index' do
           before { delete(book_path(book)) }
+
           it { expect(response).to redirect_to(books_path) }
         end
 

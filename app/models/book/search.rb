@@ -1,12 +1,16 @@
-module Book::Search
-  extend ActiveSupport::Concern
-  include Searchable
+# frozen_string_literal: true
 
-  # Consts
+module Book
+  module Search
+    extend ActiveSupport::Concern
+    include Searchable
 
-  SEARCH_EXPRESSION = %q{
+    # Consts
+
+    SEARCH_EXPRESSION = '
     LOWER(books.title) LIKE LOWER(:search) OR
     LOWER(books.description) LIKE LOWER(:search) OR
     LOWER(books.author) LIKE LOWER(:search)
-  }
+  '
+  end
 end

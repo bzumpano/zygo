@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BooksController < ApplicationController
   include CableReady::Broadcaster
 
@@ -6,13 +8,13 @@ class BooksController < ApplicationController
     description
     image
     author
-  ]
+  ].freeze
 
   # callbacks
 
-  after_action only: [:favorite, :unfavorite] do
-    cable_ready["books"].morph(
-      selector: "#" + ActionView::RecordIdentifier.dom_id(book),
+  after_action only: %i[favorite unfavorite] do
+    cable_ready['books'].morph(
+      selector: '#' + ActionView::RecordIdentifier.dom_id(book),
       html: ApplicationController.render(partial: 'books/book', locals: { current_user: current_user, book: book })
     )
     cable_ready.broadcast
@@ -21,7 +23,6 @@ class BooksController < ApplicationController
   # helper methods
 
   helper_method :books, :book, :param_order
-
 
   # actions
 
@@ -33,8 +34,7 @@ class BooksController < ApplicationController
     end
   end
 
-  def new
-  end
+  def new; end
 
   def create
     if book.save
@@ -46,8 +46,7 @@ class BooksController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     book.assign_attributes(resource_params) if resource_params.present?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Módulo incluído por models que permitem buscas.
 #
@@ -10,7 +12,7 @@ module Searchable
   # [
   #   :organ
   # ]
-  SEARCH_INCLUDES = []
+  SEARCH_INCLUDES = [].freeze
 
   # Define a expressão de busca que será usada para o filtro.
   # Ex:
@@ -24,13 +26,14 @@ module Searchable
   # Os parâmetros :search serão automaticamente transformados para buscas do
   # tipo LIKE. Os parâmetros :value serão comparados com o valor exato passado.
   #
-  SEARCH_EXPRESSION = %q{
-  }
+  SEARCH_EXPRESSION = '
+  '
 
   class_methods do
     def search(search_term, limit = nil, search_expression = self::SEARCH_EXPRESSION)
-      return search_scope unless search_term.present?
-      return results(search_term, limit, search_expression)
+      return search_scope if search_term.blank?
+
+      results(search_term, limit, search_expression)
     end
 
     def search_scope
@@ -51,7 +54,7 @@ module Searchable
       value = search_term
 
       results = search_scope.where(search_expression, search: search, value: value)
-      results = results.limit(limit) if (limit)
+      results = results.limit(limit) if limit
 
       results
     end

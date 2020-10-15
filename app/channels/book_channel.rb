@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BookChannel < ApplicationCable::Channel
   # Called when the consumer has successfully
   # become a subscriber to this channel.
@@ -5,6 +7,5 @@ class BookChannel < ApplicationCable::Channel
     stream_from 'books'
   end
 
-  def unsubscribed
-  end
+  def unsubscribed; end
 end

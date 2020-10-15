@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe BooksController, type: :controller do
@@ -141,7 +143,7 @@ RSpec.describe BooksController, type: :controller do
     end
 
     it 'permitted_params' do
-      is_expected.to permit(*permitted_params).for(:update, params: valid_params).on(:book)
+      expect(subject).to permit(*permitted_params).for(:update, params: valid_params).on(:book)
     end
 
     context 'valid' do
@@ -171,7 +173,7 @@ RSpec.describe BooksController, type: :controller do
         before { patch(:update, params: valid_params) }
 
         it { expect(book.reload.title).not_to eq(new_title) }
-        it { expect(controller).to set_flash.now.to(I18n.t("books.update.error")) }
+        it { expect(controller).to set_flash.now.to(I18n.t('books.update.error')) }
       end
     end
   end
