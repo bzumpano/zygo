@@ -1,4 +1,4 @@
-# Zygo
+# Zygo Programming Challenge
 
 ## Dependências
 - Ruby 2.7.1
@@ -28,4 +28,4 @@ bundle exec rake db:setup
 bundle exec rails s
 ```
 
-Agora basta acessar o site http://localhost:3000
+Agora basta acessar a url http://localhost:3000. No primeiro acesso você precisará cadastrar um usuário e senha para acessar a seção de livros.
